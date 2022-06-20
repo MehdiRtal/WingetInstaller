@@ -2,6 +2,17 @@ name: winget
 
 on:
   workflow_dispatch:
+    inputs:
+      arch:
+        description: "Build arch"
+        required: true
+        default: "x64"
+        type: choice
+        options:
+        - arm
+        - arm64
+        - x86
+        - x64
 
 jobs:
   build:
