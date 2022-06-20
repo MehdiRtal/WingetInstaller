@@ -25,5 +25,4 @@ jobs:
           python-version: "3.x"
       - name: Installing dependencies
       - run: pip install wget requests bs4
-      - name: Running script
-      - run: python winget.py -${{ github.event.inputs.arch }}
+      
