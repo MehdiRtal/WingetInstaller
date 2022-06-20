@@ -35,6 +35,5 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: winget
-          path: /
+          path: winget_*_*.zip
       
