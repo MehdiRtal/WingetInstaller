@@ -19,12 +19,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Installing dependencies
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
-      - run: pip install wget requests bs4 lxml
-      - name: Running script
-        uses: actions/checkout@v3
-      - run: python winget.py -${{ github.event.inputs.arch }}
+          
+      - name: Install Dependencies
+        run: pip install wget requests bs4 lxml
+      
+      - name: Run Script
+        run: python winget.py -${{ github.event.inputs.arch }}
+        
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: winget
+          path: /
       
