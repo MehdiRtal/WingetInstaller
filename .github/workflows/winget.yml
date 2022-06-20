@@ -9,10 +9,11 @@ on:
         default: "x64"
         type: choice
         options:
-        - arm
-        - arm64
-        - x86
         - x64
+        - x86
+        - arm64
+        - arm
+        
 
 jobs:
   build:
