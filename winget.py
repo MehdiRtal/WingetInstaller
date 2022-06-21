@@ -46,16 +46,12 @@ def compress(version, arch):
 
 if args.arm:
     extract("arm")
-    compress(version(), "arm")
 
 if args.arm64:
     extract("arm64")
-    compress(version(), "arm64")
 
 if args.x64:
     extract("x64")
-    compress(version(), "x64")
 
 if args.x86:
     extract("x86")
-    compress(version(), "x86")
