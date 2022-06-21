@@ -1,6 +1,6 @@
 # WingetDownloader
 
-WingetDownloader is a simple script which lets you have winget without having access to Microsoft Store, App Installer or even PowerShell. It downloads winget from the official repo and extracts it.
+WingetDownloader is a simple script which lets you download winget without having access to Microsoft Store, App Installer or even PowerShell. It downloads winget from the official repo and extracts it.
 
 ## Installation
 # Method 1
