@@ -60,7 +60,8 @@ def argparse():
         if args.artifact:
             compress(version(), "x86")
     if not args.artifact:
-        os.environ["version"] = version()
+        with open(os.getenv('GITHUB_ENV'), "a") as f:
+            f.write(f"version={version()}")
 
 if __name__ == "__main__":
     wget.download(url)
