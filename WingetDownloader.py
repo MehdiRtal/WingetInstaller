@@ -7,6 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
+parser.add_argument("-artifact", action="store_false")
 parser.add_argument("-arm", action="store_true")
 parser.add_argument("-arm64", action="store_true")
 parser.add_argument("-x86", action="store_true")
@@ -44,12 +45,20 @@ def compress(version, arch):
 def argparse():
     if args.arm:
         extract("arm")
+        if args.artifact:
+            compress(version(), "arm")
     if args.arm64:
         extract("arm64")
+        if args.artifact:
+            compress(version(), "arm64")
     if args.x64:
         extract("x64")
+        if args.artifact:
+            compress(version(), "x64")
     if args.x86:
         extract("x86")
+        if args.artifact:
+            compress(version(), "x86")
 
 if __name__ == "__main__":
     wget.download(url)
