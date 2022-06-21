@@ -13,17 +13,14 @@ parser.add_argument("-x86", action="store_true")
 parser.add_argument("-x64", action="store_true")
 args = parser.parse_args()
 
+url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+filenames = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
+root = wget.filename_from_url(url)
+
 def version():
     response = requests.get("https://github.com/microsoft/winget-cli/releases/latest")
     soup = BeautifulSoup(response.text, "lxml")
     return "".join(re.findall(r"\d|[.]", soup.find("h1", class_="d-inline mr-3").text))
-
-url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-
-wget.download(url)
-
-root = wget.filename_from_url(url)
-filenames = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
 
 def extract(arch):
     with zipfile.ZipFile(root) as zip:
@@ -44,14 +41,16 @@ def compress(version, arch):
     for filename in filenames:
         os.remove(filename)
 
-if args.arm:
-    extract("arm")
+def argparse():
+    if args.arm:
+        extract("arm")
+    if args.arm64:
+        extract("arm64")
+    if args.x64:
+        extract("x64")
+    if args.x86:
+        extract("x86")
 
-if args.arm64:
-    extract("arm64")
-
-if args.x64:
-    extract("x64")
-
-if args.x86:
-    extract("x86")
+if __name__ == "__main__":
+    wget.download(url)
+    argparse()
