@@ -35,5 +35,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: winget_${{ github.event.inputs.arch }}
-          path: winget_*_*.zip
-      
+          path: /*
