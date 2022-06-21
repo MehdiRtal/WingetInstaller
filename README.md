@@ -9,7 +9,7 @@ First clone the repo, extract it, then install python and run:
     pip install wget requests bs4 lxml 
     python WingetDownloader -arch
     
-You can replace `arch` with your disired system architecture.
+Replace `arch` with your disired system architecture.
 
 #Method 2
 Fork the repo then go to github actions and build the script by choosing your desired `arch` in the settings.
