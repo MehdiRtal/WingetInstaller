@@ -17,6 +17,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      version: ""
     steps:
       - uses: actions/checkout@v3
       
@@ -29,12 +31,14 @@ jobs:
         run: pip install wget requests bs4 lxml
       
       - name: Run Script
-        run: python WingetDownloader.py -${{ github.event.inputs.arch }}
-        
+        run: |
+          echo "version" >> $GITHUB_ENV
+          python WingetDownloader.py -artifact -${{ github.event.inputs.arch }}
+      
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: winget_${{ github.event.inputs.arch }}
+          name: winget_${{ env.version }}_${{ github.event.inputs.arch }}
           path: |
             winget.exe
             WindowsPackageManager.dll
