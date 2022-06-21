@@ -59,6 +59,8 @@ def argparse():
         extract("x86")
         if args.artifact:
             compress(version(), "x86")
+    if not args.artifact:
+        os.environ["version"] = version()
 
 if __name__ == "__main__":
     wget.download(url)
