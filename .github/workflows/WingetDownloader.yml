@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: winget_${{ github.event.inputs.arch }}
-          path: "./*"
+          path: "./*.*"
         
       - name: Delete Old Workflow Runs
         uses: Mattraks/delete-workflow-runs@v2
