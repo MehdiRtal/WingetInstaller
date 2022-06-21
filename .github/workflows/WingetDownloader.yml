@@ -1,4 +1,4 @@
-name: winget
+name: WingetDownloader
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
         run: pip install wget requests bs4 lxml
       
       - name: Run Script
-        run: python winget.py -${{ github.event.inputs.arch }}
+        run: python WingetDownloader.py -${{ github.event.inputs.arch }}
         
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
@@ -37,7 +37,7 @@ jobs:
           name: winget_${{ github.event.inputs.arch }}
           path: "./*"
         
-      - name: Delete old workflow runs
+      - name: Delete Old Workflow Runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
           token: ${{ github.token }}
