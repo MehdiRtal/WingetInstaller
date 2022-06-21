@@ -2,7 +2,7 @@
 
 ## Installation
 ### Method 1
-Clone the repo, extract it, install python and run:
+Clone the repo, extract it, then install python & run:
 
     pip install wget requests bs4 lxml 
     python WingetDownloader -arch
