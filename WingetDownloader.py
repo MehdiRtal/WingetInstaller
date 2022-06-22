@@ -42,27 +42,21 @@ def compress(version, arch):
     for filename in filenames:
         os.remove(filename)
 
-def argparse():
-    if args.arm:
-        extract("arm")
-        if args.artifact:
-            compress(version(), "arm")
-    if args.arm64:
-        extract("arm64")
-        if args.artifact:
-            compress(version(), "arm64")
-    if args.x64:
-        extract("x64")
-        if args.artifact:
-            compress(version(), "x64")
-    if args.x86:
-        extract("x86")
-        if args.artifact:
-            compress(version(), "x86")
+def deploy(arch):
+    wget.download(download_link)
+    extract(arch)
+    if args.artifact:
+        compress(version(), arch)
     if not args.artifact:
         with open(os.getenv('GITHUB_ENV'), "a") as f:
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
-    wget.download(download_link)
-    argparse()
+    if args.x64:
+        deploy("x64")
+    if args.x86:
+        deploy("x86")
+    if args.arm64:
+        deploy("arm64")
+    if args.arm:
+        deploy("arm")
