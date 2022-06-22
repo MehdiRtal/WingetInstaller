@@ -14,9 +14,9 @@ parser.add_argument("-x86", action="store_true")
 parser.add_argument("-x64", action="store_true")
 args = parser.parse_args()
 
-url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+download_link = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 filenames = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
-root = wget.filename_from_url(url)
+root = wget.filename_from_url(download_link)
 
 def version():
     response = requests.get("https://github.com/microsoft/winget-cli/releases/latest")
@@ -64,5 +64,5 @@ def argparse():
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
-    wget.download(url)
+    wget.download(download_link)
     argparse()
