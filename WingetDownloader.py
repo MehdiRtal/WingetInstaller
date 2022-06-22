@@ -43,7 +43,6 @@ def compress(version, arch):
         os.remove(filename)
 
 def deploy(arch):
-    wget.download(download_link)
     extract(arch)
     if args.artifact:
         compress(version(), arch)
@@ -52,6 +51,7 @@ def deploy(arch):
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
+    wget.download(download_link)
     if args.x64:
         deploy("x64")
     if args.x86:
