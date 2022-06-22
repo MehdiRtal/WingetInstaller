@@ -8,10 +8,7 @@ from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-artifact", action="store_false")
-parser.add_argument("-arm", action="store_true")
-parser.add_argument("-arm64", action="store_true")
-parser.add_argument("-x86", action="store_true")
-parser.add_argument("-x64", action="store_true")
+parser.add_argument("arch", nargs="?", default=False)
 args = parser.parse_args()
 
 download_link = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
@@ -47,16 +44,12 @@ def deploy(arch):
     if args.artifact:
         compress(version(), arch)
     if not args.artifact:
-        with open(os.getenv('GITHUB_ENV'), "a") as f:
+        with open(os.getenv("GITHUB_ENV"), "a") as f:
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
+    if os.path.exists(root):
+        os.remove(root)
     wget.download(download_link)
-    if args.x64:
-        deploy("x64")
-    if args.x86:
-        deploy("x86")
-    if args.arm64:
-        deploy("arm64")
-    if args.arm:
-        deploy("arm")
+    if args.arch:
+        deploy(args.arch)
