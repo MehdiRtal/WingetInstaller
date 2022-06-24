@@ -8,7 +8,8 @@ from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
 parser.add_argument("arch", nargs="?", default=False)
-parser.add_argument("-artifact", action="store_false")
+parser.add_argument("-compress", action="store_true")
+parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
 download_link = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
@@ -41,9 +42,9 @@ def compress(version, arch):
 
 def deploy(arch):
     extract(arch)
-    if args.artifact:
+    if args.compress:
         compress(version(), arch)
-    if not args.artifact:
+    if args.artifact:
         with open(os.getenv("GITHUB_ENV"), "a") as f:
             f.write(f"version={version()}")
 
