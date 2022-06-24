@@ -1,4 +1,4 @@
-name: WingetDownloader
+name: WingetInstaller
 
 on:
   workflow_dispatch:
