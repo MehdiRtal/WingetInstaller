@@ -7,7 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
-parser.add_argument("arch")
+parser.add_argument("architecture")
 parser.add_argument("-portable", action="store_false")
 parser.add_argument("-compress", action="store_true")
 parser.add_argument("-artifact", action="store_true")
