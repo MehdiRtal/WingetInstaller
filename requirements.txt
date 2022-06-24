@@ -1,0 +1,4 @@
+wget
+requests
+bs4
+lxml
