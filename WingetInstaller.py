@@ -54,7 +54,8 @@ def compress(version, arch):
 
 def install():
     for file in files_to_extract + DLLs:
-        os.system(fr"cmd /c xcopy {file} C:\Windows\System32 /c /l /y")
+        os.system(fr"cmd /c xcopy {file} C:\Windows\System32 /c /f /l /y")
+        os.remove(file)
 
 def deploy(arch):
     download()
