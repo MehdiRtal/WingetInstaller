@@ -7,7 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
-parser.add_argument("arch", nargs="?", default=False)
+parser.add_argument("arch", nargs="1")
 parser.add_argument("-portable", action="store_false")
 parser.add_argument("-compress", action="store_true")
 parser.add_argument("-artifact", action="store_true")
@@ -57,6 +57,7 @@ def install():
         os.system(fr"cmd /c xcopy {file} C:\Windows\System32")
 
 def deploy(arch):
+    download()
     extract(arch)
     if args.compress:
         compress(version(), arch)
@@ -67,6 +68,4 @@ def deploy(arch):
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
-    download()
-    if args.arch:
-        deploy(args.arch)
+    deploy(args.arch)
