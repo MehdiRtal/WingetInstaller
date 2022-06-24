@@ -14,15 +14,14 @@ parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
 download_link = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-root_file = wget.filename_from_url(download_link)
+root_file = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 files_to_extract = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
-DLLs_link = [
+DLLs = ["concrt140.dll", "msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"]
+DLLs_links = [
     "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/concrt140.dll",
     "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/msvcp140.dll",
     "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/vcruntime140.dll",
-    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/vcruntime140_1.dll"
-]
-DLLs = ["concrt140.dll", "msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"]
+    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/vcruntime140_1.dll"]
 
 def version():
     response = requests.get("https://github.com/microsoft/winget-cli/releases/latest")
@@ -30,9 +29,9 @@ def version():
     return "".join(re.findall(r"\d|[.]", soup.find("h1", class_="d-inline mr-3").text))
 
 def download():
-    wget.download(download_link)
-    for DLL_link in DLLs_link:
-        wget.download(DLL_link)
+    wget.download(download_link, bar=None)
+    for DLL_link in DLLs_links:
+        wget.download(DLL_link, bar=None)
 
 def extract(arch):
     with zipfile.ZipFile(root_file) as zip:
@@ -54,7 +53,7 @@ def compress(version, arch):
 
 def install():
     for file in files_to_extract + DLLs:
-        os.system(fr"cmd /c xcopy {file} C:\Windows\System32 /c /f /l /y")
+        os.system(fr"cmd /c xcopy {file} C:\Windows\System32 /c /q /y")
         os.remove(file)
 
 def deploy(arch):
@@ -69,4 +68,4 @@ def deploy(arch):
             f.write(f"version={version()}")
 
 if __name__ == "__main__":
-    deploy(args.arch)
+    deploy(args.architecture)
