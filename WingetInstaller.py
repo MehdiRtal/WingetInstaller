@@ -18,10 +18,10 @@ root_file = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 files_to_extract = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
 DLLs = ["concrt140.dll", "msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"]
 DLLs_links = [
-    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/concrt140.dll",
-    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/msvcp140.dll",
-    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/vcruntime140.dll",
-    "https://github.com/MehdiRtal/WingetInstaller/blob/main/DLLs/vcruntime140_1.dll"]
+    "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/concrt140.dll",
+    "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/msvcp140.dll",
+    "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140.dll",
+    "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140_1.dll"]
 
 def version():
     response = requests.get("https://github.com/microsoft/winget-cli/releases/latest")
