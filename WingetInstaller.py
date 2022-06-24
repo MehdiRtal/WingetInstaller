@@ -13,6 +13,7 @@ parser.add_argument("-compress", action="store_true")
 parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
+a = "a"
 download_link = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 root_file = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 files_to_extract = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
