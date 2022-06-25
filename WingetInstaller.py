@@ -13,8 +13,8 @@ parser.add_argument("-compress", action="store_true")
 parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
-root_file = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-files_to_extract = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
+
+files = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
 DLLs = ["concrt140.dll", "msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"]
 
 def version():
@@ -32,25 +32,25 @@ def download():
         wget.download(DLL, bar=None)
 
 def extract(arch):
-    with zipfile.ZipFile(root_file) as zip:
+    with zipfile.ZipFile("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle") as zip:
         files = zip.namelist()
         for file in files:
             if f"AppInstaller_{arch}.msix" in file:
                 zip.extract(file)
-    os.remove(root_file)
+    os.remove("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle")
     with zipfile.ZipFile(f"AppInstaller_{arch}.msix") as zip:
-        for file in list(set(files_to_extract) & set(zip.namelist())):
+        for file in list(set(files) & set(zip.namelist())):
             zip.extract(file)
     os.remove(f"AppInstaller_{arch}.msix")
 
 def compress(version, arch):
     with zipfile.ZipFile(f"winget_{version}_{arch}.zip", mode="w") as zip:
-        for file in files_to_extract + DLLs:
+        for file in files + DLLs:
             zip.write(file, file, compress_type=zipfile.ZIP_STORED)
             os.remove(file)  
 
 def install():
-    for file in files_to_extract + DLLs:
+    for file in files + DLLs:
         os.system(fr"cmd /c xcopy {file} C:\Windows\System32 /c /q /y")
         os.remove(file)
 
