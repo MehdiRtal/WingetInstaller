@@ -13,7 +13,6 @@ parser.add_argument("-compress", action="store_true")
 parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
-
 files = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
 DLLs = ["concrt140.dll", "msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"]
 
