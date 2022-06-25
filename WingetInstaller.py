@@ -31,10 +31,10 @@ def extract(arch):
         for file in zip.namelist():
             if file == f"AppInstaller_{arch}.msix":
                 zip.extract(file)
-    os.remove("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle")
     with zipfile.ZipFile(f"AppInstaller_{arch}.msix") as zip:
         for file in list(set(files) & set(zip.namelist())):
             zip.extract(file)
+    os.remove("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle")
     os.remove(f"AppInstaller_{arch}.msix")
 
 def compress(version, arch):
