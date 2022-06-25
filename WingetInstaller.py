@@ -28,8 +28,7 @@ def download():
 
 def extract(arch):
     with zipfile.ZipFile("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle") as zip:
-        files = zip.namelist()
-        for file in files:
+        for file in zip.namelist():
             if f"AppInstaller_{arch}.msix" in file:
                 zip.extract(file)
     os.remove("Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle")
