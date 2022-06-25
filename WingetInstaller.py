@@ -24,8 +24,12 @@ def version():
 
 def download():
     wget.download("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", bar=None)
-    for DLL_link in ["https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/concrt140.dll", "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/msvcp140.dll", "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140.dll", "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140_1.dll"]:
-        wget.download(DLL_link, bar=None)
+    for DLL in [
+        "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/concrt140.dll",
+        "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/msvcp140.dll",
+        "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140.dll",
+        "https://github.com/MehdiRtal/WingetInstaller/raw/main/DLLs/vcruntime140_1.dll"]:
+        wget.download(DLL, bar=None)
 
 def extract(arch):
     with zipfile.ZipFile(root_file) as zip:
