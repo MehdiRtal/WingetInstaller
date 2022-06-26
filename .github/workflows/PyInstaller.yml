@@ -26,7 +26,8 @@ jobs:
     - name: Delete Old Workflow Runs
       uses: MajorScruffy/delete-old-workflow-runs@v0.1.0
       with:
-        GITHUB_TOKEN: ${{ github.token }}
         repository: ${{ github.repository }}
         workflow: .github/workflows/PyInstaller.yml
-        older-than-seconds: 0
+        maximum-workflow-runs-to-keep: 1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
