@@ -49,4 +49,4 @@ jobs:
           repository: ${{ github.repository }}
           retain_days: 0
           keep_minimum_runs: 0
-          delete_workflow_by_state_pattern: ${{ github.workflow }}
+          delete_workflow_pattern: ${{ github.workflow }}
