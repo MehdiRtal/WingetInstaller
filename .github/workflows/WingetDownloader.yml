@@ -48,4 +48,4 @@ jobs:
           repository: ${{ github.repository }}
           workflow: .github/workflows/${{ github.workflow }}.yml
         env:
-          token: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
