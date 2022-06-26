@@ -31,7 +31,7 @@ jobs:
         run: pip install wget requests bs4 lxml
       
       - name: Run Script
-        run: python WingetDownloader.py ${{ github.event.inputs.arch }} -portable -artifact 
+        run: python WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
       
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
