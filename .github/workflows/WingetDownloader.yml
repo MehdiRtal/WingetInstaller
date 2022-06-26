@@ -45,5 +45,6 @@ jobs:
       - name: Delete Old Workflow Runs
         uses: MajorScruffy/delete-old-workflow-runs@v0.1.0
         with:
+          token: ${{ github.token }}
           repository: ${{ github.repository }}
           workflow: .github/workflows/WingetDownloader.yml
