@@ -28,7 +28,7 @@ jobs:
           python-version: "3.x"
           
       - name: Install Dependencies
-        run: pip install wget requests bs4 lxml
+        run: pip install -r requirements.txt
       
       - name: Run Script
         run: python WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
