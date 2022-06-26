@@ -5,7 +5,7 @@ import os
 import argparse
 import re
 from bs4 import BeautifulSoup
-.
+
 parser = argparse.ArgumentParser()
 parser.add_argument("architecture", nargs="?", default="x64")
 parser.add_argument("-portable", action="store_false")
