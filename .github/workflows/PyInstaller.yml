@@ -1,6 +1,9 @@
 name: PyInstaller
 
-on: push
+on:
+  push:
+    paths:
+      - "WingetInstaller.py"
 
 jobs:
   build:
