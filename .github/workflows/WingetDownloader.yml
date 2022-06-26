@@ -1,3 +1,5 @@
+name: WingetDownloader
+
 on:
   workflow_dispatch:
     inputs:
@@ -44,6 +46,6 @@ jobs:
         uses: MajorScruffy/delete-old-workflow-runs@v0.1.0
         with:
           repository: ${{ github.repository }}
-          workflow: ${{ github.workflow }}
+          workflow: .github/workflows/${{ github.workflow }}.yml
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          token: ${{ github.token }}
