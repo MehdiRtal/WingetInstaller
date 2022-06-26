@@ -20,9 +20,10 @@ jobs:
         path: dist/windows
 
     - name: Delete Old Workflow Runs
-      uses: MajorScruffy/delete-old-workflow-runs@v0.1.0
+      uses: Mattraks/delete-workflow-runs@v2.0.3
       with:
+        token: ${{ github.token }}
         repository: ${{ github.repository }}
-        workflow: .github/workflows/${{ github.workflow }}.yml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+        retain_days: 0
+        keep_minimum_runs: 1
+        delete_workflow_by_state_pattern: ${{ github.workflow }}
