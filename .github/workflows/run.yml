@@ -34,7 +34,7 @@ jobs:
         run: python WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
       
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@latest
         with:
           name: winget_${{ env.version }}_${{ github.event.inputs.arch }}
           path: |
@@ -43,7 +43,7 @@ jobs:
             resources.pri
         
       - name: Delete Old Workflow Runs
-        uses: Mattraks/delete-workflow-runs@latest
+        uses: Mattraks/delete-workflow-runs@v2.0.3
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
