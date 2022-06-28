@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    tags: v*
 
 jobs:
   release:
@@ -21,4 +20,4 @@ jobs:
       with:
         repo_token: ${{ github.token }}
         prerelease: false
-        files: "dist/windows"
+        files: dist/windows
