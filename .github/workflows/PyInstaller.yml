@@ -1,4 +1,4 @@
-name: WinApt
+name: WingetInstaller
 
 on:
   push:
