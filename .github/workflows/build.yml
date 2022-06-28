@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@3.0.2
-    - name: PyInstaller Windows
+    - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@v0.1.2
       with:
         path: ./
-    - name: Upload Build Artifact
+    - name: Upload Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
         name: ${{ github.workflow }}
         path: dist/windows
-    - name: Delete Old Workflow Runs
+    - name: Delete Workflow Runs
       uses: Mattraks/delete-workflow-runs@v2.0.3
       with:
         token: ${{ github.token }}
