@@ -1,9 +1,9 @@
-name: WingetInstaller
+name: Release
 
 on:
   push:
-    paths:
-      - "${{ github.workflow }}.py"
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -16,11 +16,12 @@ jobs:
       with:
         path: "./"
 
-    - name: Upload Build Artifact
-      uses: actions/upload-artifact@v3
+    - name: Upload Build
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        name: ${{ github.workflow }}
-        path: "dist/windows"
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        files: "dist/windows"
 
     - name: Delete Old Workflow Runs
       uses: Mattraks/delete-workflow-runs@v2.0.3
