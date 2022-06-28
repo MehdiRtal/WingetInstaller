@@ -14,12 +14,12 @@ jobs:
     - name: PyInstaller Windows
       uses: JackMcKew/pyinstaller-action-windows@v0.1.2
       with:
-        path: "./"
+        path: ./
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v3
       with:
         name: ${{ github.workflow }}
-        path: "dist/windows"
+        path: dist/windows
     - name: Delete Old Workflow Runs
       uses: Mattraks/delete-workflow-runs@latest
       with:
