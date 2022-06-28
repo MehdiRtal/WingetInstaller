@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       arch:
-        description: "Build arch"
+        description: Build arch
         required: true
-        default: "x64"
+        default: x64
         type: choice
         options:
         - x64
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
+          python-version: 3.x
           
       - name: Install Dependencies
         run: pip install -r requirements.txt
