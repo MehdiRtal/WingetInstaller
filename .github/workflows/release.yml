@@ -6,28 +6,19 @@ on:
       - "v*"
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: PyInstaller Windows
-      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+    - name: Wait for Build
+      uses: lewagon/wait-on-check-action@v1.1.1
       with:
-        path: "./"
-
-    - name: Upload Build
-      uses: "marvinpinto/action-automatic-releases@latest"
+          ref: ${{ github.ref }}
+          check-name: build
+          repo-token: ${{ github.token }}
+    - name: Push Release
+      uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: ${{ github.token }}
         prerelease: false
         files: "dist/windows"
-
-    - name: Delete Old Workflow Runs
-      uses: Mattraks/delete-workflow-runs@v2.0.3
-      with:
-        token: ${{ github.token }}
-        repository: ${{ github.repository }}
-        delete_workflow_pattern: ${{ github.workflow }}
-        retain_days: 0
-        keep_minimum_runs: 0
