@@ -21,7 +21,7 @@ jobs:
         name: ${{ github.workflow }}
         path: "dist/windows"
     - name: Delete Old Workflow Runs
-      uses: Mattraks/delete-workflow-runs@v2.0.3
+      uses: Mattraks/delete-workflow-runs@latest
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
