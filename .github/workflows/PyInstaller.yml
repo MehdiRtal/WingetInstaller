@@ -3,7 +3,7 @@ name: WingetInstaller
 on:
   push:
     paths:
-      - "WingetInstaller.py"
+      - "${{ github.workflow }}.py"
 
 jobs:
   build:
