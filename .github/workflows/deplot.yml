@@ -1,4 +1,4 @@
-name: Run
+name: Deploy
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ on:
         - arm
         
 jobs:
-  run:
+  deploy:
     runs-on: ubuntu-latest
     env:
       version: ""
