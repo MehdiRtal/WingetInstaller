@@ -10,7 +10,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("architecture", nargs="?", default="x64")
 parser.add_argument("-portable", action="store_false")
 parser.add_argument("-compress", action="store_true")
-parser.add_argument("-artifact", action="store_true")
 args = parser.parse_args()
 
 files = ["winget.exe", "WindowsPackageManager.dll", "resources.pri"]
@@ -55,9 +54,6 @@ def deploy(arch):
         compress(version(), arch)
     if args.portable:
         install()
-    if args.artifact:
-        with open(os.getenv("GITHUB_ENV"), "a") as f:
-            f.write(f"version={version()}")
 
 if __name__ == "__main__":
     deploy(args.architecture)
