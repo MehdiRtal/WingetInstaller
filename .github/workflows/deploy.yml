@@ -17,33 +17,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      version: ""
     steps:
-      - uses: actions/checkout@latest
-      
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@latest
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.x
-          
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-      
+          python-version: '3.x'
+          cache: 'poetry'
+      - name: Install dependencies
+        run: poetry install
       - name: Run Script
-        run: python WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
-      
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@latest
+        run: poetry run WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
           name: winget_${{ env.version }}_${{ github.event.inputs.arch }}
           path: |
             winget.exe
             WindowsPackageManager.dll
             resources.pri
-        
-      - name: Delete Old Workflow Runs
-        uses: Mattraks/delete-workflow-runs@v2.0.3
+      - name: Delete old worflow runs
+        uses: Mattraks/delete-workflow-runs@v2
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}

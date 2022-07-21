@@ -8,23 +8,31 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        path: './'
-        
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3.1.0
+        python-version: '3.x'
+        cache: 'poetry'
+    - name: Install dependencies
+      run: |
+        poetry add flake8 pytest pyinstaller
+        poetry install
+    - name: Lint with flake8
+      run: poetry run flake8 . --show-source --statistics
+    - name: Test with pytest
+      run: poetry run pytest
+    - name: Package with pyinstaller
+      run: poetry run pyinstaller --onefile main.spec
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ github.workflow }}
         path: 'dist/windows'
-        
-    - name: Delete Workflow Runs
-      uses: Mattraks/delete-workflow-runs@v2.0.3
+    - name: Delete old workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
