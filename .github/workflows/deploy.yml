@@ -23,11 +23,14 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-          cache: 'poetry'
-      - name: Install dependencies
-        run: poetry install
+          cache: 'pip'
+      - name: Wait for Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          checkName: test
+          token: ${{ github.token }}
       - name: Run Script
-        run: poetry run WingetInstaller.py ${{ github.event.inputs.arch }} -portable -artifact 
+        run: python ${{ github.event.repository.name }} ${{ github.event.inputs.arch }} -portable -artifact 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:

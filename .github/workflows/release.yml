@@ -10,14 +10,13 @@ jobs:
     steps:
     - uses: actions/checkout@3
     - name: Wait for Build
-      uses: lewagon/wait-on-check-action@v1
+      uses: fountainhead/action-wait-for-check@v1.0.0
       with:
-          ref: ${{ github.ref }}
-          check-name: build
-          repo-token: ${{ github.token }}
+        checkName: Build
+        token: ${{ github.token }}
     - name: Push Release
       uses: marvinpinto/action-automatic-releases@v1
       with:
         repo_token: ${{ github.token }}
         prerelease: false
-        files: 'dist/windows'
+        files: 'dist/'
